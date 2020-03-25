@@ -1,0 +1,5 @@
+# Ignore some unnecessary files. 
+node_modules/
+src/playground/
+Command-Instructions.txt
+React-components.txt
