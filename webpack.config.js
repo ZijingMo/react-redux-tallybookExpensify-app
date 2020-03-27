@@ -1,31 +1,56 @@
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-module.exports = {
-    entry: './src/app.js',
-    output: {
-        path: path.join(__dirname, 'public'),
-        filename: 'bundle.js'
+// Export the function other than export the object
+// When call this arrow function, webpack will return the object
+module.exports = (env) => {
+    const isProduction = env === 'production';
+    const CSSExtract = new ExtractTextPlugin('styles.css');
+
+    //console.log('env: ', env);
+    return {
+        entry: './src/app.js',
+        output: {
+            path: path.join(__dirname, 'public'),
+            filename: 'bundle.js'
+        },
+        module: {
+            rules: [{
+                loader: 'babel-loader',
+                test: /\.js$/,
+                exclude: /node_modules/
+                }, {
+                test: /\.s?css$/,
+                use: CSSExtract.extract({
+                  use: [
+                    {
+                      loader: 'css-loader',
+                      options: {
+                          sourceMap: true
+                      }
+                    },
+                    {
+                      loader: 'sass-loader',
+                      options: {
+                          sourceMap: true
+                      }
+                    }
+                  ]
+                })
+            }]
     },
-    module: {
-        rules: [{
-            loader: 'babel-loader',
-            test: /\.js$/,
-            exclude: /node_modules/
-        }, {
-            test: /\.s?css$/,
-            use: [
-                'style-loader',
-                'css-loader',
-                'sass-loader'
-            ]
-        }]
-    },
-    devtool: 'cheap-module-eval-source-map', // This is for the bug-mapping
+    plugins: [
+        CSSExtract
+    ],
+    // The both are source map in dev-tool for the bug-mapping behavior
+    devtool: isProduction ? 'source-map' : 'inline-source-map', 
     devServer: {
         contentBase: path.join(__dirname, 'public'),
         historyApiFallback: true
     }
+  };
 };
+
 
 
 
