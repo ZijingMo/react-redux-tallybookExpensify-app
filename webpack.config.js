@@ -46,6 +46,7 @@ module.exports = (env) => {
     devtool: isProduction ? 'source-map' : 'inline-source-map', 
     devServer: {
         contentBase: path.join(__dirname, 'public'),
+        // This served up index.html file in the public folder, as a result, we got the 404 at every single time
         historyApiFallback: true
     }
   };
