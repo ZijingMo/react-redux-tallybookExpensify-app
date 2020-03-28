@@ -5,3 +5,7 @@ Command-Instructions.txt
 React-components.txt
 gitReadme.md
 webPack.md
+public/bundle.js
+public/bundle.js.map
+public/styles.css
+public/styles.css.js
