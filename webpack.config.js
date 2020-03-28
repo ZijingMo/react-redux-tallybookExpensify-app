@@ -11,7 +11,7 @@ module.exports = (env) => {
     return {
         entry: './src/app.js',
         output: {
-            path: path.join(__dirname, 'public'),
+            path: path.join(__dirname, 'public', 'dist'),
             filename: 'bundle.js'
         },
         module: {
@@ -47,7 +47,9 @@ module.exports = (env) => {
     devServer: {
         contentBase: path.join(__dirname, 'public'),
         // This served up index.html file in the public folder, as a result, we got the 404 at every single time
-        historyApiFallback: true
+        historyApiFallback: true,
+        // The bundle.js(map) and styles.css(map) don't need to show at folder 'public'
+        publicPath: '/dist/'
     }
   };
 };
