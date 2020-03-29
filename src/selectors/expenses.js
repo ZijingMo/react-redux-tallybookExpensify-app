@@ -1,6 +1,8 @@
 import moment from 'moment';
 
 // Get visible expenses
+// First parameter is only object 'expenses', no destruction
+// Second parameter destructs the property from object 'filter'
 const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
   return expenses.filter((expense) => {
     const createAtMoment = moment(expense.createAt);
