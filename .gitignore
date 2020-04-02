@@ -2,6 +2,5 @@
 node_modules/
 public/dist/
 playground/
-yarn.lock
 .env.test
 .env.development
