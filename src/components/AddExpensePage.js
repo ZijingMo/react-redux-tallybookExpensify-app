@@ -1,14 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ExpenseForm from './ExpenseForm';
-import { addExpense } from '../actions/expenses';
+import { startAddExpense } from '../actions/expenses';
 
-// Refactoring the code, from functional to class component:
-// For jest test
-
+// Refactoring the code, from stateless to state component for jest test
 export class AddExpensePage extends React.Component {
   onSubmit = (expense) => {
-    this.props.addExpense(expense);
+    this.props.startAddExpense(expense);
     // This method leads to redirect to the expensify dashboard (Home-Page) when the user click the button 'Add Expense' 
     this.props.history.push('/');
   };
@@ -25,7 +23,7 @@ export class AddExpensePage extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addExpense: (expense) => dispatch(addExpense(expense))
+  startAddExpense: (expense) => dispatch(startAddExpense(expense))
 });
 
 export default connect(undefined, mapDispatchToProps)(AddExpensePage);

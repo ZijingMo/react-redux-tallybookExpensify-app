@@ -1,25 +1,37 @@
-import uuid from 'uuid'
+import uuid from 'uuid';
+import database from '../firebase/firebase';
 
 // These are the 'action' objects down below
 
 // ADD_EXPENSE
-export const addExpense = (
-  { 
-  description = '', 
-  note = '', 
-  amount = 0, 
-  createAt = 0 
-  } = {}
-) => ({
+export const addExpense = (expense) => ({
   type: 'ADD_EXPENSE',
-  expense: {
-    id: uuid(),
-    description,
-    note,
-    amount,
-    createAt
-  }
+  expense
 });
+
+// Dispatch the action 'addExpense'
+// This function is able to return another function, since method 'applyMiddleware()' has been setup.
+// Checking 'configureStore.js' to see the definition of 'applyMiddleware()' and 'thunk'
+// Returning function helps us send the data to database 'firebase' 
+export const startAddExpense = (expenseData = {}) => {
+  return (dispatch) => {
+    const {
+      description = '', 
+      note = '', 
+      amount = 0, 
+      createAt = 0 
+    } = expenseData;
+    // Create an object for database connection 
+    const expense = { description, note, amount, createAt }
+    // One more return here is for jest test (the logic here is promise() chaining)
+    return database.ref('expenses').push(expense).then((ref) => {
+        dispatch(addExpense({
+          id: ref.key,
+          ...expense
+        }));
+    });
+  };
+};
 
 // REMOVE_EXPENSE
 export const removeExpense = ({ id } = {}) => ({
