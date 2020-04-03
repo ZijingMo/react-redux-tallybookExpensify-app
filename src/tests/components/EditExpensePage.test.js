@@ -5,15 +5,15 @@ import expenses from '../fixtures/expenses';
 
 // Setting some global variables in this file 
 // Applying 'beforeEach()' method to define mock function, root node render (shallow) 
-let editExpense, history, wrapper, removeExpense;
+let editExpense, history, wrapper, startRemoveExpense;
 beforeEach(() => {
   editExpense = jest.fn();
-  removeExpense = jest.fn();
+  startRemoveExpense = jest.fn();
   history = { push: jest.fn() };
   wrapper = shallow(
   <EditExpensePage 
     editExpense={editExpense} 
-    removeExpense ={removeExpense}
+    startRemoveExpense ={startRemoveExpense}
     history={history}
     expense={expenses[1]}
   />);
@@ -29,10 +29,10 @@ test('should handle action editExpense', () => {
   expect(editExpense).toHaveBeenLastCalledWith(expenses[1].id, expenses[1]);
 });
 
-test('should handle action removeExpense', () => {
+test('should handle action startRemoveExpense', () => {
   wrapper.find('button').simulate('click');
   expect(history.push).toHaveBeenLastCalledWith('/');
-  expect(removeExpense).toHaveBeenLastCalledWith({
+  expect(startRemoveExpense).toHaveBeenLastCalledWith({
     id: expenses[1].id
   });
 });

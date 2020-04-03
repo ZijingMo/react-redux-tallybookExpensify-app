@@ -1,7 +1,7 @@
 import uuid from 'uuid';
 import database from '../firebase/firebase';
 
-// These are 'Action Creators' down below
+// These are 'Action Creators' down below (addExpense, removeExpense, editExpense, setExpenses)
 // Action creators are exactly that—functions that create actions. 
 // They usually return JS objects
 
@@ -40,6 +40,16 @@ export const removeExpense = ({ id } = {}) => ({
 type: 'REMOVE_EXPENSE',
 id
 });
+
+// Deleting data in database 'firebase'
+export const startRemoveExpense = ( { id } = {}) => { 
+  return (dispatch) => {
+    return database.ref(`expenses/${id}`).remove()
+           .then(() => {
+             dispatch(removeExpense({ id }));
+           });
+  };
+};
 
 // EDIT_EXPENSE
 // For these two arguments, 'id' is a string number an 'updates' is an object

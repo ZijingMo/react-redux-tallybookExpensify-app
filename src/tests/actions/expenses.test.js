@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store'; // A mock store for testing Redux async action creators and middleware.
 import thunk from 'redux-thunk'; // Allows you to write action creators that return a function instead of an action
-import { startAddExpense, addExpense, editExpense, removeExpense, setExpenses, startSetExpenses } from '../../actions/expenses';
+import { startAddExpense, addExpense, editExpense, removeExpense, startRemoveExpense, setExpenses, startSetExpenses } from '../../actions/expenses';
 import expenses from '../fixtures/expenses'; // import dummy data
 import database from '../../firebase/firebase'; // import firebase to check the id
 
@@ -8,6 +8,7 @@ const createMockStore = configureMockStore([thunk]);
 
 // Jest-Function: beforeEach()
 // Runs a function before each of tests in this file run
+// Uploads the data from fixture file 'expenses' to test firebase
 beforeEach((done) => {
   const expensesData = {};
   expenses.forEach(({ id, description, note, amount, createAt }) => {
@@ -25,6 +26,28 @@ test('should setup remove expense action', () => {
     type: 'REMOVE_EXPENSE',
     id: 'sdad3232323ee'
   });
+});
+
+test('should remove expenses from firebase', (done) => {
+  const store = createMockStore({});
+  const id = expenses[0].id;
+  store.dispatch(startRemoveExpense({ id })).then(() => {
+    const actions = store.getActions();
+    // The first 'expect()'
+    expect(actions[0]).toEqual({
+      type: 'REMOVE_EXPENSE',
+      id
+    });
+    // To avoid endless callback functions
+    // Returns a value to help us using promise() methods
+    return database.ref(`expenses/${id}`).once('value');
+    }).then((snapshot) => {
+      // The second 'expect()'
+      // The method 'toBeFalsy' is a jest function. 
+      // In JavaScript, there are six falsy values: false, 0, '', null, undefined, and NaN.
+      expect(snapshot.val()).toBeFalsy();
+      done();
+  })
 });
 
 test('should setup edit expense action', () => {
