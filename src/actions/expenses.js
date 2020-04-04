@@ -35,6 +35,7 @@ export const startAddExpense = (expenseData = {}) => {
   };
 };
 
+
 // REMOVE_EXPENSE
 export const removeExpense = ({ id } = {}) => ({
 type: 'REMOVE_EXPENSE',
@@ -44,12 +45,14 @@ id
 // Deleting data in database 'firebase'
 export const startRemoveExpense = ( { id } = {}) => { 
   return (dispatch) => {
+    // Using firebase build-in function remove() to delete
     return database.ref(`expenses/${id}`).remove()
            .then(() => {
              dispatch(removeExpense({ id }));
            });
   };
 };
+
 
 // EDIT_EXPENSE
 // For these two arguments, 'id' is a string number an 'updates' is an object
@@ -58,6 +61,17 @@ type: 'EDIT_EXPENSE',
 id,
 updates
 });
+
+// Editing data in database 'firebase'
+export const startEditExpenses = (id, updates) => {
+  return (dispatch) => {
+    // Using firebase build-in function update() to edit
+    return database.ref(`expenses/${id}`).update(updates)
+      .then(() => {
+        dispatch(editExpense(id, updates));
+      });
+  };
+};
 
 // SET_EXPENSES
 export const setExpenses = (expenses) => ({

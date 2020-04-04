@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ExpenseForm from './ExpenseForm';
-import { editExpense, startRemoveExpense } from '../actions/expenses';
+import { startEditExpenses, startRemoveExpense } from '../actions/expenses';
 
 // Refactoring the code, from functional to class component:
 // For jest test
 
 export class EditExpensePage extends React.Component {
   onSubmit = (expense) => {
-    this.props.editExpense(this.props.expense.id, expense);
+    this.props.startEditExpenses(this.props.expense.id, expense);
     // This method leads to redirect to the expensify dashboard (Home-Page) when the user click the button 'Add Expense' 
     this.props.history.push('/');
     //console.log('updated', expense);
@@ -51,7 +51,7 @@ const mapStateToProps = (state, props) => {
 // Every action creator wrapped into a dispatch call so they may be invoked directly, will be merged into the component’s props.
 // Import actions (editExpense, removeExpense) from action folder and subscribe to prop in class 'EditExpensePage'
 const mapDispatchToProps = (dispatch, props) => ({
-  editExpense: (id, expense) => dispatch(editExpense(id, expense)),
+  startEditExpenses: (id, expense) => dispatch(startEditExpenses(id, expense)),
   startRemoveExpense: (data) => dispatch(startRemoveExpense(data)) 
 });
 
@@ -59,7 +59,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(EditExpensePage);
 
 
 
-// Functional form as a reference
+// Stateless component form as a reference
 
 // const EditExpensePage = (props) => {
 //   //console.log(props);
