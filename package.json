@@ -51,7 +51,7 @@
     "uuid": "3.1.0",
     "validator": "8.0.0",
     "webpack": "3.1.0",
-    "webpack-dev-server": "2.5.1"
+    "webpack-dev-server": "3.10.3"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
