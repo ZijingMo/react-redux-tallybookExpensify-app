@@ -16,7 +16,8 @@ export const addExpense = (expense) => ({
 // Checking 'configureStore.js' to see the definition of 'applyMiddleware()' and 'thunk'
 // Returning function helps us send the data to database 'firebase' 
 export const startAddExpense = (expenseData = {}) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
     const {
       description = '', 
       note = '', 
@@ -26,7 +27,7 @@ export const startAddExpense = (expenseData = {}) => {
     // Create an object for database connection 
     const expense = { description, note, amount, createAt }
     // One more return here is for jest test (the logic here is promise() chaining)
-    return database.ref('expenses').push(expense).then((ref) => {
+    return database.ref(`users/${uid}/expenses`).push(expense).then((ref) => {
         dispatch(addExpense({
           id: ref.key,
           ...expense
@@ -44,9 +45,10 @@ id
 
 // Deleting data in database 'firebase'
 export const startRemoveExpense = ( { id } = {}) => { 
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
     // Using firebase build-in function remove() to delete
-    return database.ref(`expenses/${id}`).remove()
+    return database.ref(`users/${uid}/expenses/${id}`).remove()
            .then(() => {
              dispatch(removeExpense({ id }));
            });
@@ -64,9 +66,10 @@ updates
 
 // Editing data in database 'firebase'
 export const startEditExpenses = (id, updates) => {
-  return (dispatch) => {
-    // Using firebase build-in function update() to edit
-    return database.ref(`expenses/${id}`).update(updates)
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    // Using firebase build-in function update() to edit the data
+    return database.ref(`users/${uid}/expenses/${id}`).update(updates)
       .then(() => {
         dispatch(editExpense(id, updates));
       });
@@ -81,8 +84,9 @@ export const setExpenses = (expenses) => ({
 
 // Fetching data from database 'firebase'
 export const startSetExpenses = () => {
-  return(dispatch) => {
-    return database.ref('expenses')
+  return(dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/expenses`)
       .once('value')
       .then((snapshot) => {
         const fetchingData = [];
