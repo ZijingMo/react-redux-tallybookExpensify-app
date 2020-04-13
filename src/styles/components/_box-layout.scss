@@ -1,0 +1,32 @@
+.box-layout {
+  align-items: center;
+  background: url('/images/moneyBG.gif'); //piggyBank.jpg, moneyBG.gif
+  background-size: 100% 100%; // 50% 100%
+  background: cover;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+  //position: absolute;
+}
+
+.box-layout__box {
+  //display: block;
+  background: fade-out(aliceblue, 0.1);
+  border-radius: 10px;
+  padding: 3.2rem, 1.6rem, 3.2rem, 1.6rem;
+  text-align: center;
+  width: 50rem;
+}
+
+.box-layout__title {
+  margin: 0 0 $m-size, 0;
+  line-height: 1;
+  font-size: 4rem;
+  
+}
+
+.box-layout__message {
+  margin: 0 $m-size 0 $m-size;
+  font-size: 2rem;
+}

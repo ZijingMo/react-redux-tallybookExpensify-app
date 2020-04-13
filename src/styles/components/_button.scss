@@ -1,0 +1,17 @@
+
+.button {
+  background-color: $light-blue; //#1e90ff
+  border: none;
+  border-radius: 5px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', sans-serif;
+  font-weight: 100;
+  font-size: $large-font;
+  color: ghostwhite;
+  margin: $m-size 0 $l-size 0;
+  padding: $s-size;
+}
+
+.button:hover {
+  background: #1e90ff;
+  font-weight: 300;
+}

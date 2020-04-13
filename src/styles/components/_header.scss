@@ -1,0 +1,20 @@
+.header {
+  background: $black-blue;
+}
+
+.header__title {
+  color: ghostwhite;
+  text-decoration: none; //No underline
+  h1 {
+    margin: 0;
+    //padding: $l-size, 0, $l-size, 0;
+  }
+}
+
+.header__contentStyle {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: $s-size, 0, $s-size, 0;
+}
+
