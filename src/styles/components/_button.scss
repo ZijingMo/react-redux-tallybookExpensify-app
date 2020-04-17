@@ -7,11 +7,29 @@
   font-weight: 100;
   font-size: $large-font;
   color: ghostwhite;
+  display: inline-block;
   margin: $m-size 0 $l-size 0;
   padding: $s-size;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.button--link {
+  background: none;
+  border: none;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', sans-serif;
+  font-weight: 100;
+  font-size: $large-font;
+  color: ghostwhite;
+  display: inline-block;
+  margin: $l-size 0;
+  padding: $s-size;
+  text-decoration: none;
+  line-height: 1;
 }
 
 .button:hover {
   background: #1e90ff;
   font-weight: 300;
 }
+
