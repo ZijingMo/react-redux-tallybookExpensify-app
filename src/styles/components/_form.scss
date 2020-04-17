@@ -1,0 +1,18 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  > * {
+    margin-bottom: $m-size;
+  }
+}
+
+.form__error {
+  margin: 0 0 $m-size 0;
+  font-size: 2.4rem;
+  font-style: italic;
+  color: #cc0000;
+}
+
+.form__error:hover{
+  color: #f30000;
+}

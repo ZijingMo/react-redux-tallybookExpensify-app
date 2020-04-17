@@ -8,10 +8,15 @@
   font-size: $large-font;
   color: ghostwhite;
   display: inline-block;
-  margin: $m-size 0 $l-size 0;
+  margin: $m-size 0 0 0;
   padding: $s-size;
   text-decoration: none;
   line-height: 1;
+}
+
+.button:hover {
+  background: #1e90ff;
+  font-weight: 300;
 }
 
 .button--link {
@@ -28,8 +33,23 @@
   line-height: 1;
 }
 
-.button:hover {
-  background: #1e90ff;
+.button--secondary {
+  background: #888;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', sans-serif;
+  font-weight: 100;
+  font-size: $large-font;
+  color:ghostwhite;
+  display: inline-block;
+  //margin: $l-size 0;
+  padding: $s-size;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.button--secondary:hover {
+  background: #6f6f6f;
   font-weight: 300;
 }
 
