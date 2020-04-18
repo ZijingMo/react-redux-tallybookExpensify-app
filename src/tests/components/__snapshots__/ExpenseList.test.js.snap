@@ -1,38 +1,92 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render ExpenseList with empty message 1`] = `
-<div>
-  <p>
-    No expenses
-  </p>
+<div
+  className="content-container"
+>
+  <div
+    className="list-header"
+  >
+    <div
+      className="show-for-mobile"
+    >
+      Expenses
+    </div>
+    <div
+      className="show-for-others"
+    >
+      Expense
+    </div>
+    <div
+      className="show-for-others"
+    >
+      Amount
+    </div>
+  </div>
+  <div
+    className="list-body"
+  >
+    <div
+      className="list-item list-item--message"
+    >
+      <span>
+         No expenses 
+      </span>
+    </div>
+  </div>
 </div>
 `;
 
 exports[`should render ExpenseList with expenses 1`] = `
-<div>
-  <ExpenseListItem
-    amount={214}
-    createAt={0}
-    description="Candy"
-    id="axz342"
-    key="axz342"
-    note=""
-  />
-  <ExpenseListItem
-    amount={2612}
-    createAt={-10544400000}
-    description="Gas"
-    id="opi945"
-    key="opi945"
-    note=""
-  />
-  <ExpenseListItem
-    amount={20000}
-    createAt={172800000}
-    description="Credit"
-    id="uil586"
-    key="uil586"
-    note=""
-  />
+<div
+  className="content-container"
+>
+  <div
+    className="list-header"
+  >
+    <div
+      className="show-for-mobile"
+    >
+      Expenses
+    </div>
+    <div
+      className="show-for-others"
+    >
+      Expense
+    </div>
+    <div
+      className="show-for-others"
+    >
+      Amount
+    </div>
+  </div>
+  <div
+    className="list-body"
+  >
+    <ExpenseListItem
+      amount={214}
+      createAt={0}
+      description="Candy"
+      id="axz342"
+      key="axz342"
+      note=""
+    />
+    <ExpenseListItem
+      amount={2612}
+      createAt={-10544400000}
+      description="Gas"
+      id="opi945"
+      key="opi945"
+      note=""
+    />
+    <ExpenseListItem
+      amount={20000}
+      createAt={172800000}
+      description="Credit"
+      id="uil586"
+      key="uil586"
+      note=""
+    />
+  </div>
 </div>
 `;
